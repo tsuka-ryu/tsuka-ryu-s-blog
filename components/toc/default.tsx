@@ -1,12 +1,12 @@
-'use client';
+"use client";
 // import { useI18n } from '@/contexts/i18n'; TODO: 必要になったら有効にする
-import { cn } from '@/utils/cn';
-import { mergeRefs } from '@/utils/merge-refs';
-import { type ComponentProps, useRef } from 'react';
-import { useTOCItems, TocThumb } from '.';
-import * as Primitive from 'fumadocs-core/toc';
+import { cn } from "@/utils/cn";
+import { mergeRefs } from "@/utils/merge-refs";
+import { type ComponentProps, useRef } from "react";
+import { useTOCItems, TocThumb } from ".";
+import * as Primitive from "fumadocs-core/toc";
 
-export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
+export function TOCItems({ ref, className, ...props }: ComponentProps<"div">) {
   const containerRef = useRef<HTMLDivElement>(null);
   const items = useTOCItems();
   // const { text } = useI18n();
@@ -27,10 +27,7 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
       />
       <div
         ref={mergeRefs(ref, containerRef)}
-        className={cn(
-          'flex flex-col border-s border-fd-foreground/10',
-          className,
-        )}
+        className={cn("flex flex-col border-s border-fd-foreground/10", className)}
         {...props}
       >
         {items.map((item) => (
@@ -46,10 +43,10 @@ function TOCItem({ item }: { item: Primitive.TOCItemType }) {
     <Primitive.TOCItem
       href={item.url}
       className={cn(
-        'prose py-1.5 text-sm text-fd-muted-foreground transition-colors wrap-anywhere first:pt-0 last:pb-0 data-[active=true]:text-fd-primary',
-        item.depth <= 2 && 'ps-3',
-        item.depth === 3 && 'ps-6',
-        item.depth >= 4 && 'ps-8',
+        "prose py-1.5 text-sm text-fd-muted-foreground transition-colors wrap-anywhere first:pt-0 last:pb-0 data-[active=true]:text-fd-primary",
+        item.depth <= 2 && "ps-3",
+        item.depth === 3 && "ps-6",
+        item.depth >= 4 && "ps-8",
       )}
     >
       {item.title}

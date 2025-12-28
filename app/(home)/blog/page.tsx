@@ -10,7 +10,7 @@ export default function Page() {
   const posts = [...blog.getPages()].sort(
     (a, b) =>
       new Date(b.data.date ?? getName(b.path)).getTime() -
-      new Date(a.data.date ?? getName(a.path)).getTime()
+      new Date(a.data.date ?? getName(a.path)).getTime(),
   );
 
   return (
@@ -20,9 +20,7 @@ export default function Page() {
         {posts.map((post) => (
           <Link key={post.url} href={post.url}>
             <p>{post.data.title}</p>
-            <p>
-              {new Date(post.data.date ?? getName(post.path)).toDateString()}
-            </p>
+            <p>{new Date(post.data.date ?? getName(post.path)).toDateString()}</p>
           </Link>
         ))}
       </section>

@@ -3,11 +3,7 @@ import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
 import path from "node:path";
 import { ReactNode } from "react";
-import {
-  PageTOCPopover,
-  PageTOCPopoverContent,
-  PageTOCPopoverTrigger,
-} from "./client";
+import { PageTOCPopover, PageTOCPopoverContent, PageTOCPopoverTrigger } from "./client";
 import * as TocDefault from "@/components/toc/default";
 import * as TocClerk from "@/components/toc/clerk";
 import { TOCProvider, TOCScrollArea } from "@/components/toc";
@@ -59,11 +55,7 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
         <PageTOCPopoverContent>
           {tocPopoverOptions.header}
           <TOCScrollArea>
-            {tocPopoverOptions.style === "clerk" ? (
-              <TocClerk.TOCItems />
-            ) : (
-              <TocDefault.TOCItems />
-            )}
+            {tocPopoverOptions.style === "clerk" ? <TocClerk.TOCItems /> : <TocDefault.TOCItems />}
           </TOCScrollArea>
           {tocPopoverOptions.footer}
         </PageTOCPopoverContent>
@@ -79,8 +71,7 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
             <p className="mb-1 text-sm text-fd-muted-foreground">At</p>
             <p className="font-medium">
               {new Date(
-                page.data.date ??
-                  path.basename(page.path, path.extname(page.path))
+                page.data.date ?? path.basename(page.path, path.extname(page.path)),
               ).toDateString()}
             </p>
           </div>
@@ -109,14 +100,10 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
         </h3>
         {/* TODO: スクロール位置の判定が微妙なので、一番したまでいくように修正したい */}
         <TOCScrollArea>
-          {tocOptions.style === "clerk" ? (
-            <TocClerk.TOCItems />
-          ) : (
-            <TocDefault.TOCItems />
-          )}
+          {tocOptions.style === "clerk" ? <TocClerk.TOCItems /> : <TocDefault.TOCItems />}
         </TOCScrollArea>
         {tocOptions.footer}
       </div>
-    </div>
+    </div>,
   );
 }

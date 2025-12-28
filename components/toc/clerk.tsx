@@ -1,12 +1,12 @@
-'use client';
-import * as Primitive from 'fumadocs-core/toc';
-import { type ComponentProps, useEffect, useRef, useState } from 'react';
-import { cn } from '@/utils/cn';
-import { useTOCItems, TocThumb } from '.';
-import { mergeRefs } from '@/utils/merge-refs';
+"use client";
+import * as Primitive from "fumadocs-core/toc";
+import { type ComponentProps, useEffect, useRef, useState } from "react";
+import { cn } from "@/utils/cn";
+import { useTOCItems, TocThumb } from ".";
+import { mergeRefs } from "@/utils/merge-refs";
 // import { useI18n } from '@/contexts/i18n'; TODO: 必要になったら有効にする
 
-export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
+export function TOCItems({ ref, className, ...props }: ComponentProps<"div">) {
   const containerRef = useRef<HTMLDivElement>(null);
   const items = useTOCItems();
   // const { text } = useI18n();
@@ -35,20 +35,17 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
         const styles = getComputedStyle(element);
         const offset = getLineOffset(items[i].depth) + 1,
           top = element.offsetTop + parseFloat(styles.paddingTop),
-          bottom =
-            element.offsetTop +
-            element.clientHeight -
-            parseFloat(styles.paddingBottom);
+          bottom = element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom);
 
         w = Math.max(offset, w);
         h = Math.max(h, bottom);
 
-        d.push(`${i === 0 ? 'M' : 'L'}${offset} ${top}`);
+        d.push(`${i === 0 ? "M" : "L"}${offset} ${top}`);
         d.push(`L${offset} ${bottom}`);
       }
 
       setSvg({
-        path: d.join(' '),
+        path: d.join(" "),
         width: w + 1,
         height: h,
       });
@@ -93,11 +90,7 @@ export function TOCItems({ ref, className, ...props }: ComponentProps<'div'>) {
           />
         </div>
       )}
-      <div
-        ref={mergeRefs(containerRef, ref)}
-        className={cn('flex flex-col', className)}
-        {...props}
-      >
+      <div ref={mergeRefs(containerRef, ref)} className={cn("flex flex-col", className)} {...props}>
         {items.map((item, i) => (
           <TOCItem
             key={item.url}
@@ -160,9 +153,9 @@ function TOCItem({
       )}
       <div
         className={cn(
-          'absolute inset-y-0 w-px bg-fd-foreground/10',
-          offset !== upperOffset && 'top-1.5',
-          offset !== lowerOffset && 'bottom-1.5',
+          "absolute inset-y-0 w-px bg-fd-foreground/10",
+          offset !== upperOffset && "top-1.5",
+          offset !== lowerOffset && "bottom-1.5",
         )}
         style={{
           insetInlineStart: offset,

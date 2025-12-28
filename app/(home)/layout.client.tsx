@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useId } from "react";
 
@@ -16,10 +16,7 @@ export function FumadocsIcon(props: React.SVGProps<SVGSVGElement>) {
         strokeWidth="1"
       />
       <defs>
-        <linearGradient
-          id={`${id}-iconGradient`}
-          gradientTransform="rotate(45)"
-        >
+        <linearGradient id={`${id}-iconGradient`} gradientTransform="rotate(45)">
           <stop offset="45%" stopColor="var(--color-fd-background)" />
           <stop offset="100%" stopColor="var(--color-fd-primary)" />
         </linearGradient>

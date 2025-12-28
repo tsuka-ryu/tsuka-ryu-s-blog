@@ -1,5 +1,5 @@
-'use client';
-import * as Primitive from 'fumadocs-core/toc';
+"use client";
+import * as Primitive from "fumadocs-core/toc";
 import {
   type ComponentProps,
   createContext,
@@ -8,9 +8,9 @@ import {
   useEffect,
   useEffectEvent,
   useRef,
-} from 'react';
-import { cn } from '@/utils/cn';
-import { mergeRefs } from '@/utils/merge-refs';
+} from "react";
+import { cn } from "@/utils/cn";
+import { mergeRefs } from "@/utils/merge-refs";
 
 const TOCContext = createContext<Primitive.TOCItemType[]>([]);
 
@@ -32,25 +32,19 @@ export function TOCProvider({
   );
 }
 
-export function TOCScrollArea({
-  ref,
-  className,
-  ...props
-}: ComponentProps<'div'>) {
+export function TOCScrollArea({ ref, className, ...props }: ComponentProps<"div">) {
   const viewRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
       ref={mergeRefs(viewRef, ref)}
       className={cn(
-        'relative min-h-0 text-sm ms-px overflow-auto [scrollbar-width:none] mask-[linear-gradient(to_bottom,transparent,white_16px,white_calc(100%-16px),transparent)] py-3',
+        "relative min-h-0 text-sm ms-px overflow-auto [scrollbar-width:none] mask-[linear-gradient(to_bottom,transparent,white_16px,white_calc(100%-16px),transparent)] py-3",
         className,
       )}
       {...props}
     >
-      <Primitive.ScrollProvider containerRef={viewRef}>
-        {props.children}
-      </Primitive.ScrollProvider>
+      <Primitive.ScrollProvider containerRef={viewRef}>{props.children}</Primitive.ScrollProvider>
     </div>
   );
 }
@@ -61,10 +55,7 @@ interface RefProps {
   containerRef: RefObject<HTMLElement | null>;
 }
 
-export function TocThumb({
-  containerRef,
-  ...props
-}: ComponentProps<'div'> & RefProps) {
+export function TocThumb({ containerRef, ...props }: ComponentProps<"div"> & RefProps) {
   const thumbRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -121,9 +112,7 @@ function calc(container: HTMLElement, active: string[]): TocThumb {
     upper = Math.min(upper, element.offsetTop + parseFloat(styles.paddingTop));
     lower = Math.max(
       lower,
-      element.offsetTop +
-        element.clientHeight -
-        parseFloat(styles.paddingBottom),
+      element.offsetTop + element.clientHeight - parseFloat(styles.paddingBottom),
     );
   }
 
@@ -131,6 +120,6 @@ function calc(container: HTMLElement, active: string[]): TocThumb {
 }
 
 function update(element: HTMLElement, info: TocThumb): void {
-  element.style.setProperty('--fd-top', `${info[0]}px`);
-  element.style.setProperty('--fd-height', `${info[1]}px`);
+  element.style.setProperty("--fd-top", `${info[0]}px`);
+  element.style.setProperty("--fd-height", `${info[1]}px`);
 }
