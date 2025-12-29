@@ -27,6 +27,7 @@ export async function getLLMText(page: InferPageType<typeof source>) {
 ${processed}`;
 }
 
-export const blog = loader(toFumadocsSource(blogPosts, []), {
+export const blog = loader({
   baseUrl: "/blog",
+  source: toFumadocsSource(blogPosts, []),
 });
