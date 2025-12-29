@@ -31,3 +31,12 @@ export const blog = loader({
   baseUrl: "/blog",
   source: toFumadocsSource(blogPosts, []),
 });
+
+export function getBlogImage(page: InferPageType<typeof blog>) {
+  const segments = [...page.slugs, "image.png"];
+
+  return {
+    segments,
+    url: `/og/blog/${segments.join("/")}`,
+  };
+}

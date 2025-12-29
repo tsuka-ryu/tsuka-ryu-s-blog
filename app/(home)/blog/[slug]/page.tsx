@@ -1,4 +1,4 @@
-import { blog } from "@/lib/source";
+import { blog, getBlogImage } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
 import path from "node:path";
@@ -7,11 +7,28 @@ import { PageTOCPopover, PageTOCPopoverContent, PageTOCPopoverTrigger } from "./
 import * as TocDefault from "@/components/toc/default";
 import * as TocClerk from "@/components/toc/clerk";
 import { TOCProvider, TOCScrollArea } from "@/components/toc";
+import type { Metadata } from "next";
 
 export function generateStaticParams(): { slug: string }[] {
   return blog.getPages().map((page) => ({
     slug: page.slugs[0],
   }));
+}
+
+export async function generateMetadata(
+  props: PageProps<"/blog/[slug]">,
+): Promise<Metadata> {
+  const params = await props.params;
+  const page = blog.getPage([params.slug]);
+  if (!page) notFound();
+
+  return {
+    title: page.data.title,
+    description: page.data.description,
+    openGraph: {
+      images: getBlogImage(page).url,
+    },
+  };
 }
 
 export default async function Page(props: PageProps<"/blog/[slug]">) {
