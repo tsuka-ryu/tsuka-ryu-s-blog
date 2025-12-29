@@ -1,45 +1,48 @@
-# my-blog-prototype
+# tsukaryu's blog
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+個人ブログサイトのプロトタイプです。[Fumadocs](https://fumadocs.dev)を使用してドキュメント機能とブログ機能を実装し、[Paper Shaders](https://github.com/paper-design/shaders)のGrainGradientを使って美しいグラデーション背景を実現しています。
 
-Run development server:
+## 技術スタック
+
+- **Next.js** - Reactフレームワーク
+- **Fumadocs** - ドキュメント・ブログ機能
+- **Paper Shaders** - WebGLベースのグラデーション背景エフェクト
+- **Tailwind CSS** - スタイリング
+
+## セットアップ
+
+このプロジェクトは**pnpm**を使用しています。[@antfu/ni](https://github.com/antfu/ni)を使うと便利です。
 
 ```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
+# 依存関係のインストール
+nci
+
+# 開発サーバーの起動
+nr dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
 
-## Explore
+## プロジェクト構成
 
-In the project, you can see:
+### 主要ファイル
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+- `lib/source.ts` - コンテンツソースアダプター。[`loader()`](https://fumadocs.dev/docs/headless/source-api)でコンテンツにアクセス
+- `lib/layout.shared.tsx` - レイアウトの共通設定
+- `source.config.ts` - Fumadocs MDXの設定（frontmatterスキーマなど）
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+### ルート構成
 
-### Fumadocs MDX
+| ルート                    | 説明                               |
+| ------------------------- | ---------------------------------- |
+| `app/(home)`              | ランディングページとその他のページ |
+| `app/(home)/blog`         | ブログ一覧・詳細ページ             |
+| `app/(home)/about`        | Aboutページ                        |
+| `app/docs`                | ドキュメントレイアウトとページ     |
+| `app/api/search/route.ts` | 検索機能のRoute Handler            |
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+## 参考リンク
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
-
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Fumadocs](https://fumadocs.dev)
+- [Paper Shaders](https://github.com/paper-design/shaders)
