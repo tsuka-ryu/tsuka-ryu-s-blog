@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
@@ -13,8 +13,6 @@ const GrainGradient = dynamic(
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
-  const ref = useRef<HTMLImageElement | null>(null);
-  const visible = useIsVisible(ref);
   const [showShaders, setShowShaders] = useState(false);
 
   useEffect(() => {
@@ -47,35 +45,4 @@ export function Hero() {
       )}
     </>
   );
-}
-
-// TODO: シングルトンパターンを使ってレイアウトシフト対策をしているらしい、useRefとの違いを探究すること
-let observer: IntersectionObserver;
-const observerTargets = new WeakMap<Element, (entry: IntersectionObserverEntry) => void>();
-
-// TODO: 動いてなさそう
-function useIsVisible(ref: RefObject<HTMLElement | null>) {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    observer ??= new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        observerTargets.get(entry.target)?.(entry);
-      }
-    });
-
-    const element = ref.current;
-    if (!element) return;
-    observerTargets.set(element, (entry) => {
-      setVisible(entry.isIntersecting);
-    });
-    observer.observe(element);
-
-    return () => {
-      observer.unobserve(element);
-      observerTargets.delete(element);
-    };
-  }, [ref]);
-
-  return visible;
 }

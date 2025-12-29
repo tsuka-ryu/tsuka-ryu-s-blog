@@ -4,7 +4,6 @@
 
 @theme {
   --spacing-page: 1024px;
-  /* TODO: ライトのカラーテーマは見直したい */
   --color-fd-primary: hsl(25 95% 40%);
   --animate-fd-fade-in: fd-fade-in 1000ms ease;
 }
