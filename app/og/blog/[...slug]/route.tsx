@@ -1,12 +1,12 @@
 import { getBlogImage, blog } from "@/lib/source";
 import { notFound } from "next/navigation";
 import { ImageResponse } from "@takumi-rs/image-response";
-import type { Font, PersistentImage } from "@takumi-rs/core";
+import type { Font } from "@takumi-rs/core";
 import BlogPost from "@/components/og-image";
 import fs from "fs/promises";
 import path from "path";
 
-const [fontBuffer, backgroundImage] = await Promise.all([
+const [fontBuffer, backgroundImageBuffer] = await Promise.all([
   fs.readFile(path.join(process.cwd(), "public/fonts/NotoSansJP.ttf")),
   fs.readFile(path.join(process.cwd(), "public/og-background-image.webp")),
 ]);
@@ -20,12 +20,8 @@ const fonts: Font[] = [
   },
 ];
 
-const persistentImages: PersistentImage[] = [
-  {
-    src: "og-background",
-    data: backgroundImage,
-  },
-];
+// Convert image to base64 data URL
+const backgroundImageBase64 = `data:image/webp;base64,${backgroundImageBuffer.toString('base64')}`;
 
 export const revalidate = false;
 
@@ -50,14 +46,13 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
       date={formattedDate}
       // category={""} TODO: カテゴリ実装したら追加
       avatar={"https://avatars.githubusercontent.com/u/69495387"}
-      backgroundImage="url(og-background)"
+      backgroundImage={`url(${backgroundImageBase64})`}
     />,
     {
       width: 1200,
       height: 630,
       format: "webp",
       fonts,
-      persistentImages,
     },
   );
 }
