@@ -29,13 +29,10 @@ OG画像生成といえば、vercelのsatoriと、それをベースにした`"n
 
 fontの読み込みについてもドキュメントに書かれていて、今回はNoto Sans JPを指定してます。ただフォントファイルが9.3MBあるため、サブセット化をしたいと思っています。
 
-[Persistent Imagesは](https://takumi.kane.tw/docs/persistent-images)はうまく動かなかったので断念。
-
 ```tsx title="app/og/blog/[...slug]/route.tsx"
 // import文は割愛
 
-
-const [fontBuffer, backgroundImageBuffer] = await Promise.all([
+const [fontBuffer, backgroundImage] = await Promise.all([
   fs.readFile(path.join(process.cwd(), "public/fonts/NotoSansJP.ttf")),
   fs.readFile(path.join(process.cwd(), "public/og-background-image.webp")),
 ]);
@@ -49,8 +46,12 @@ const fonts: Font[] = [
   },
 ];
 
-// Convert image to base64 data URL
-const backgroundImageBase64 = `data:image/webp;base64,${backgroundImageBuffer.toString('base64')}`;
+const persistentImages: PersistentImage[] = [
+  {
+    src: "og-background",
+    data: backgroundImage,
+  },
+];
 
 export const revalidate = false;
 
@@ -73,15 +74,15 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
       title={page.data.title}
       author={page.data.author}
       date={formattedDate}
-      // category={""} TODO: カテゴリ実装したら追加
       avatar={"https://avatars.githubusercontent.com/u/69495387"}
-      backgroundImage={`url(${backgroundImageBase64})`}
+      backgroundImage="url(og-background)"
     />,
     {
       width: 1200,
       height: 630,
       format: "webp",
       fonts,
+      persistentImages,
     },
   );
 }
