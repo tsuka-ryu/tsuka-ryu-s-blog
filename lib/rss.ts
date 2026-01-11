@@ -12,7 +12,7 @@ export function getRSS() {
     description: "tsuka-ryu's personal blog",
     image: `${baseUrl}/banner.png`,
     favicon: `${baseUrl}/favicon.ico`,
-    copyright: "All rights reserved 2025, tsuka-ryu",
+    copyright: "All rights reserved 2026, tsuka-ryu",
   });
 
   for (const page of blog.getPages()) {
@@ -20,7 +20,7 @@ export function getRSS() {
       id: page.url,
       title: page.data.title,
       description: page.data.description,
-      link: `${baseUrl}${page.url}`,
+      link: `${baseUrl}${page.url}?view=rss`,
       date: new Date(page.data.date),
       author: [
         {
