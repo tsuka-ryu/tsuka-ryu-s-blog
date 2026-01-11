@@ -6,7 +6,7 @@ import fs from "fs/promises";
 import path from "path";
 
 // FIXME: コンテンツ数が4以上になると、ビルドがハングするようになる
-export const revalidate = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...slug]">) {
   const { slug } = await params;
