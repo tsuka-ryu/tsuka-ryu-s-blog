@@ -37,6 +37,7 @@ export function generateStaticParams(): { slug: string }[] {
 
 export default async function Page(props: PageProps<"/blog/[slug]">) {
   const params = await props.params;
+  const searchParams = await props.searchParams;
   const page = blog.getPage([params.slug]);
   // TODO: 型をちゃんとしたほうがいい
   const tocPopoverOptions = {
@@ -53,6 +54,19 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
 
   if (!page) notFound();
   const { body: Mdx, toc } = await page.data.load();
+
+  const isRSSView = searchParams?.view === "rss";
+
+  const components = isRSSView
+    ? {
+        h1: "h1",
+        h2: "h2",
+        h3: "h3",
+        h4: "h4",
+        h5: "h5",
+        h6: "h6",
+      }
+    : undefined;
 
   const wrapper = (children: ReactNode) => (
     <TOCProvider single={tocOptions.single} toc={toc}>
@@ -101,8 +115,8 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
           <h1 className="text-3xl font-semibold mb-4">{page.data.title}</h1>
           <p className="text-fd-muted-foreground mb-8">{page.data.description}</p>
 
-          <div className="prose min-w-0 flex-1">
-            <Mdx components={getMDXComponents()} />
+          <div className="prose max-w-[calc(100vw-2rem)] md:max-w-full min-w-0 flex-1">
+            <Mdx components={getMDXComponents(components)} />
           </div>
         </article>
 
