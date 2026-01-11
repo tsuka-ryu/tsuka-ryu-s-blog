@@ -101,7 +101,7 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
           <h1 className="text-3xl font-semibold mb-4">{page.data.title}</h1>
           <p className="text-fd-muted-foreground mb-8">{page.data.description}</p>
 
-          <div className="prose min-w-0 flex-1">
+          <div className="prose max-w-[calc(100vw-2rem)] md:max-w-full min-w-0 flex-1">
             <Mdx components={getMDXComponents()} />
           </div>
         </article>
