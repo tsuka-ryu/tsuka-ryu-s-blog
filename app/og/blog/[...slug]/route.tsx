@@ -6,7 +6,7 @@ import fs from "fs/promises";
 import path from "path";
 
 // FIXME: コンテンツ数が4以上になると、ビルドがハングするようになる
-export const revalidate = 0;
+// export const revalidate = 0;
 
 export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...slug]">) {
   const { slug } = await params;
@@ -56,9 +56,9 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
   );
 }
 
-export function generateStaticParams() {
-  return blog.getPages().map((page) => ({
-    lang: page.locale,
-    slug: getBlogImage(page).segments,
-  }));
-}
+// export function generateStaticParams() {
+//   return blog.getPages().map((page) => ({
+//     lang: page.locale,
+//     slug: getBlogImage(page).segments,
+//   }));
+// }
