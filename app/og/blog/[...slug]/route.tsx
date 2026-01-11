@@ -12,16 +12,14 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
   const page = blog.getPage(slug.slice(0, -1));
   if (!page) notFound();
 
-  // Construct absolute URL for background image
-  const baseUrl =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const backgroundImageUrl = `${baseUrl}/og-background-image.webp`;
-
   // Load Noto Sans JP font
   const fontPath = path.join(process.cwd(), "public/fonts/NotoSansJP.ttf");
   const fontData = await fs.readFile(fontPath);
+
+  // Load background image directly from filesystem
+  const backgroundImagePath = path.join(process.cwd(), "public/og-background-image.webp");
+  const backgroundImageData = await fs.readFile(backgroundImagePath);
+  const backgroundImageBase64 = `data:image/webp;base64,${backgroundImageData.toString("base64")}`;
 
   // Format date for display
   const formattedDate = page.data.date
@@ -39,7 +37,7 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
       date={formattedDate}
       // category={""} TODO: カテゴリ実装したら追加
       avatar={"https://avatars.githubusercontent.com/u/69495387"}
-      backgroundImage={`url(${backgroundImageUrl})`}
+      backgroundImage={`url(${backgroundImageBase64})`}
     />,
     {
       width: 1200,
