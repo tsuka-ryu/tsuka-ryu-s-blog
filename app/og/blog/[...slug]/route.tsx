@@ -1,12 +1,11 @@
-import { getBlogImage, blog } from "@/lib/source";
+import { blog } from "@/lib/source";
 import { notFound } from "next/navigation";
 import { ImageResponse } from "@takumi-rs/image-response";
 import BlogPost from "@/components/og-image";
 import fs from "fs/promises";
 import path from "path";
 
-// FIXME: コンテンツ数が4以上になると、ビルドがハングするようになる
-// export const revalidate = 0;
+export const revalidate = false;
 
 export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...slug]">) {
   const { slug } = await params;
@@ -56,6 +55,7 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
   );
 }
 
+// FIXME: コンテンツ数が4以上になると、ビルドがハングするようになる
 // export function generateStaticParams() {
 //   return blog.getPages().map((page) => ({
 //     lang: page.locale,
