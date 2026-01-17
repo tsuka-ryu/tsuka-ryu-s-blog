@@ -8,6 +8,7 @@ date: 2026-01-11 13:17:30+09:00
 あけましておめでとうございます。年末年始寝込んでいたら、もう1月前半が終わってしまいそうです。まだ病み上がりで元気な感じがないので、早く元気になりたいです。今回はブログにOG画像生成機能を追加したので紹介します。
 
 ## Takumi
+
 [Fumadocsのドキュメント](https://www.fumadocs.dev/docs/integrations)に出てきたので、今回は[Takumi](https://takumi.kane.tw/)というライブラリを使ってOG画像を生成してみました。
 
 ### OG画像生成
@@ -20,8 +21,8 @@ OG画像生成といえば、vercelのsatoriと、それをベースにした`"n
 
 特徴は[公式ドキュメント](https://takumi.kane.tw/)や[リポジトリ](https://github.com/kane50613/takumi)に記載されてるので詳細は割愛しますが、自分が良さそうだなと思ったのは下記です。
 
-* Rustで実装されているため高速（ファイル数が増えるとビルド時間が長くなりがちな場合に有効）
-* Tailwind CSS ファースト
+- Rustで実装されているため高速（ファイル数が増えるとビルド時間が長くなりがちな場合に有効）
+- Tailwind CSS ファースト
 
 ## 実装
 
@@ -89,4 +90,4 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
 
 ---
 
-*最終更新: 2026年1月11日*
+_最終更新: 2026年1月11日_

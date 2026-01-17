@@ -1,5 +1,12 @@
 "use client";
 
+import { useTOCItems } from "@/components/toc";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+// import { useI18n } from '@/contexts/i18n'; TODO: 必要になったら有効にする
+import { ChevronDown } from "@/icons";
+import { cn } from "@/utils/cn";
+import { useActiveAnchor } from "fumadocs-core/toc";
+import { useTreePath } from "fumadocs-ui/contexts/tree";
 import {
   type ComponentProps,
   createContext,
@@ -10,13 +17,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { cn } from "@/utils/cn";
-// import { useI18n } from '@/contexts/i18n'; TODO: 必要になったら有効にする
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useTOCItems } from "@/components/toc";
-import { useActiveAnchor } from "fumadocs-core/toc";
-import { useTreePath } from "fumadocs-ui/contexts/tree";
-import { ChevronDown } from "@/icons";
 // import { LayoutContext } from '../client';
 
 const TocPopoverContext = createContext<{

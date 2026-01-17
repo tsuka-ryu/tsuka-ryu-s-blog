@@ -1,14 +1,17 @@
+import path from "node:path";
+
+import { TOCProvider, TOCScrollArea } from "@/components/toc";
+import * as TocClerk from "@/components/toc/clerk";
+import * as TocDefault from "@/components/toc/default";
+import { createMetadata } from "@/lib/metadata";
 import { blog, getBlogImage } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
-import path from "node:path";
 import { ReactNode } from "react";
+
 import { PageTOCPopover, PageTOCPopoverContent, PageTOCPopoverTrigger } from "./client";
-import * as TocDefault from "@/components/toc/default";
-import * as TocClerk from "@/components/toc/clerk";
-import { TOCProvider, TOCScrollArea } from "@/components/toc";
+
 import type { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(props: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const params = await props.params;

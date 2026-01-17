@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const GrainGradient = dynamic(
   () => import("@paper-design/shaders-react").then((mod) => mod.GrainGradient),
