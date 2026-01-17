@@ -6,14 +6,12 @@ export default function BlogPost({
   date,
   category,
   avatar,
-  backgroundImage,
 }: {
   title: ReactNode;
   author: string;
   date: ReactNode;
   category?: ReactNode;
   avatar?: string;
-  backgroundImage?: string;
 }) {
   return (
     <div
@@ -24,16 +22,37 @@ export default function BlogPost({
         height: "100%",
         backgroundColor: "#111",
         color: "white",
-        backgroundImage: backgroundImage
-          ? backgroundImage.startsWith("url(")
-            ? backgroundImage
-            : `url(${backgroundImage})`
-          : "linear-gradient(135deg, #1a1a1a 0%, #000 100%)",
+        backgroundImage:
+          "linear-gradient(135deg, #ff8800 0%, #ff6b6b 33%, #cc5577 66%, #000000 100%)",
         padding: "60px",
         justifyContent: "space-between",
         fontFamily: "Noto Sans JP",
+        position: "relative",
       }}
     >
+      {/* ノイズテクスチャオーバーレイ */}
+      <svg
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          opacity: 0.4,
+        }}
+      >
+        <filter id="noise">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.4"
+            numOctaves="4"
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)" />
+      </svg>
       <div
         style={{
           display: "flex",

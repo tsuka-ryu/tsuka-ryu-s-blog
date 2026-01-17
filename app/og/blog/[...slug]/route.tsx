@@ -1,9 +1,9 @@
+import fs from "fs/promises";
 import path from "path";
 
 import BlogPost from "@/components/og-image";
-import { blog } from "@/lib/source";
+import { blog, getBlogImage } from "@/lib/source";
 import { ImageResponse } from "@takumi-rs/image-response";
-import fs from "fs/promises";
 import { notFound } from "next/navigation";
 
 export const revalidate = false;
@@ -16,11 +16,6 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
   // Load Noto Sans JP font
   const fontPath = path.join(process.cwd(), "public/fonts/NotoSansJP.ttf");
   const fontData = await fs.readFile(fontPath);
-
-  // Load background image directly from filesystem
-  const backgroundImagePath = path.join(process.cwd(), "public/og-background-image.webp");
-  const backgroundImageData = await fs.readFile(backgroundImagePath);
-  const backgroundImageBase64 = `data:image/webp;base64,${backgroundImageData.toString("base64")}`;
 
   // Format date for display
   const formattedDate = page.data.date
@@ -38,7 +33,6 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
       date={formattedDate}
       // category={""} TODO: カテゴリ実装したら追加
       avatar={"https://avatars.githubusercontent.com/u/69495387"}
-      backgroundImage={`url(${backgroundImageBase64})`}
     />,
     {
       width: 1200,
@@ -56,10 +50,9 @@ export async function GET(_req: Request, { params }: RouteContext<"/og/blog/[...
   );
 }
 
-// FIXME: コンテンツ数が4以上になると、ビルドがハングするようになる
-// export function generateStaticParams() {
-//   return blog.getPages().map((page) => ({
-//     lang: page.locale,
-//     slug: getBlogImage(page).segments,
-//   }));
-// }
+export function generateStaticParams() {
+  return blog.getPages().map((page) => ({
+    lang: page.locale,
+    slug: getBlogImage(page).segments,
+  }));
+}
