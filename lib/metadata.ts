@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
 export function createMetadata(override: Metadata): Metadata {
   return {

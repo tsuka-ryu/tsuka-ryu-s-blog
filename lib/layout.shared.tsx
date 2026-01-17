@@ -1,4 +1,5 @@
 import { TsukaryuIcon } from "@/app/(home)/layout.client";
+
 import type { BaseLayoutProps, LinkItemType } from "fumadocs-ui/layouts/shared";
 
 export const linkItems: LinkItemType[] = [

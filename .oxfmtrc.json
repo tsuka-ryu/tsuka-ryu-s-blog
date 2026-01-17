@@ -1,4 +1,21 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": []
+  "ignorePatterns": [],
+  "experimentalSortImports": {
+    "order": "asc",
+    "ignoreCase": true,
+    "newlinesBetween": true,
+    "partitionByComment": false,
+    "partitionByNewline": false,
+    "sortSideEffects": true,
+    "internalPattern": ["@/**"],
+    "groups": [
+      ["builtin"],
+      ["external"],
+      ["internal"],
+      ["parent", "sibling", "index"],
+      ["side-effect"],
+      ["type"]
+    ]
+  }
 }

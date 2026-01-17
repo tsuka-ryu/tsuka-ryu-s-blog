@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+
 import Logo from "../icon.png";
 
 export function TsukaryuIcon() {

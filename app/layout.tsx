@@ -1,10 +1,12 @@
-import { RootProvider } from "fumadocs-ui/provider/next";
-import "./global.css";
-import { Inter } from "next/font/google";
-import type { Metadata } from "next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next";
 import { createMetadata, baseUrl } from "@/lib/metadata";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { RootProvider } from "fumadocs-ui/provider/next";
+import { Inter } from "next/font/google";
+
+import "./global.css";
+
+import type { Metadata } from "next";
 
 const inter = Inter({
   subsets: ["latin"],

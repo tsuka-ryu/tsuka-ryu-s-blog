@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { blog } from "@/lib/source";
 import { PathUtils } from "fumadocs-core/source";
+import Link from "next/link";
+
 import { Gimmick } from "./page.client";
 
 function getName(path: string) {

@@ -2,9 +2,10 @@
 // import { useI18n } from '@/contexts/i18n'; TODO: 必要になったら有効にする
 import { cn } from "@/utils/cn";
 import { mergeRefs } from "@/utils/merge-refs";
-import { type ComponentProps, useRef } from "react";
-import { useTOCItems, TocThumb } from ".";
 import * as Primitive from "fumadocs-core/toc";
+import { type ComponentProps, useRef } from "react";
+
+import { useTOCItems, TocThumb } from ".";
 
 export function TOCItems({ ref, className, ...props }: ComponentProps<"div">) {
   const containerRef = useRef<HTMLDivElement>(null);
