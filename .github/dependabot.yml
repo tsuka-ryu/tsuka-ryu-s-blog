@@ -10,9 +10,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"  # すべてのnpm依存関係を1つのPRにまとめる
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"  # すべてのGitHub Actionsを1つのPRにまとめる
