@@ -20,7 +20,7 @@ export function getRSS() {
       id: page.url,
       title: page.data.title,
       description: page.data.description,
-      link: `${baseUrl}${page.url}?view=rss`,
+      link: `${baseUrl}${page.url}/rss`,
       date: new Date(page.data.date),
       author: [
         {
