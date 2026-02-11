@@ -52,11 +52,11 @@ nr dev
 
 **例:**
 
-| タグ名      | URL                 |
-| ----------- | ------------------- |
-| Next.js     | `/tags/nextjs`      |
-| RSSフィード | `/tags/rsshuido`    |
-| rust        | `/tags/rust`        |
+| タグ名      | URL              |
+| ----------- | ---------------- |
+| Next.js     | `/tags/nextjs`   |
+| RSSフィード | `/tags/rsshuido` |
+| rust        | `/tags/rust`     |
 
 タグのスラッグ変換処理は `lib/tag-utils.ts` で管理されています。
 
