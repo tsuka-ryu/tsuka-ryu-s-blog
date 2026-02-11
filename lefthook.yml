@@ -6,8 +6,7 @@ pre-push:
         if ! git diff --quiet || ! git diff --cached --quiet; then
           git add -A
           git commit -m "chore: auto-format before push
-
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+          Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
           echo "Auto-committed formatting changes"
         fi
       fail_text: "Format failed. Please fix the formatting errors before pushing."
