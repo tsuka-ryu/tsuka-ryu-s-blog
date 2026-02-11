@@ -13,6 +13,8 @@ interface PostListItemProps {
 }
 
 export function PostListItem({ post }: PostListItemProps) {
+  const tags = post.data.tags as string[] | undefined;
+
   return (
     <div key={post.url}>
       <Link
@@ -21,6 +23,19 @@ export function PostListItem({ post }: PostListItemProps) {
       >
         {post.data.title}
       </Link>
+      {tags && tags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-1">
+          {tags.map((tag) => (
+            <Link
+              key={tag}
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className="text-xs text-fd-muted-foreground underline decoration-fd-primary hover:opacity-80"
+            >
+              #{tag}
+            </Link>
+          ))}
+        </div>
+      )}
       <p className="text-sm text-neutral-600 dark:text-neutral-400">
         {new Date(post.data.date ?? getName(post.path))
           .toLocaleString("ja-JP")
