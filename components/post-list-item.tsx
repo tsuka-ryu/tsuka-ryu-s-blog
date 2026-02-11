@@ -3,6 +3,7 @@ import { PathUtils } from "fumadocs-core/source";
 import Link from "next/link";
 
 import type { blog } from "@/lib/source";
+import { getTagSlug } from "@/lib/tag-utils";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
@@ -28,7 +29,7 @@ export function PostListItem({ post }: PostListItemProps) {
           {tags.map((tag) => (
             <Link
               key={tag}
-              href={`/tags/${encodeURIComponent(tag)}`}
+              href={`/tags/${getTagSlug(tag)}`}
               className="text-xs text-fd-muted-foreground underline decoration-fd-primary hover:opacity-80"
             >
               #{tag}

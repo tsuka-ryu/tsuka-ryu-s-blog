@@ -2,6 +2,7 @@ import { blog } from "@/lib/source";
 import Link from "next/link";
 
 import { Gimmick } from "@/components/gimmick";
+import { getTagSlug } from "@/lib/tag-utils";
 
 export default function TagsPage() {
   const posts = blog.getPages();
@@ -32,7 +33,7 @@ export default function TagsPage() {
           {sortedTags.map(([tag, count]) => (
             <li key={tag} className="before:content-['-'] before:mr-2">
               <Link
-                href={`/tags/${encodeURIComponent(tag)}`}
+                href={`/tags/${getTagSlug(tag)}`}
                 className="text-accent-foreground underline decoration-fd-primary hover:opacity-80"
               >
                 {tag} [{count}]

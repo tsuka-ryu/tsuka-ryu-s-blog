@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Gimmick } from "@/components/gimmick";
 import { PostListItem } from "@/components/post-list-item";
+import { getTagSlug, getTagNameFromSlug } from "@/lib/tag-utils";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
@@ -27,18 +28,34 @@ export async function generateStaticParams() {
   });
 
   return Array.from(tags).map((tag) => ({
-    tag: encodeURIComponent(tag),
+    tag: getTagSlug(tag),
   }));
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { tag: encodedTag } = await params;
-  const tag = decodeURIComponent(encodedTag);
+  const { tag: slug } = await params;
 
-  const posts = [...blog.getPages()]
+  // 全てのタグを収集
+  const allPosts = blog.getPages();
+  const allTags = new Set<string>();
+  allPosts.forEach((post) => {
+    const postTags = post.data.tags as string[] | undefined;
+    if (postTags) {
+      postTags.forEach((tag) => allTags.add(tag));
+    }
+  });
+
+  // スラッグから元のタグ名を取得
+  const tagName = getTagNameFromSlug(slug, Array.from(allTags));
+
+  if (!tagName) {
+    notFound();
+  }
+
+  const posts = [...allPosts]
     .filter((post) => {
       const tags = post.data.tags as string[] | undefined;
-      return tags?.includes(tag);
+      return tags?.includes(tagName);
     })
     .sort(
       (a, b) =>
@@ -54,7 +71,7 @@ export default async function TagPage({ params }: TagPageProps) {
     <main className="relative flex flex-col flex-1">
       <Gimmick />
       <div className="z-0 mx-auto max-w-page w-full px-4 3xl:px-8 py-8">
-        <h1 className="mb-6 text-2xl font-bold">Posts for: #{tag}</h1>
+        <h1 className="mb-6 text-2xl font-bold">Posts for: #{tagName}</h1>
         <section className="space-y-4">
           {posts.map((post) => (
             <PostListItem key={post.url} post={post} />
