@@ -1,10 +1,9 @@
-import { blog } from "@/lib/source";
-import { PathUtils } from "fumadocs-core/source";
-import { notFound } from "next/navigation";
-
 import { Gimmick } from "@/components/gimmick";
 import { PostListItem } from "@/components/post-list-item";
+import { blog } from "@/lib/source";
 import { getTagSlug, getTagNameFromSlug } from "@/lib/tag-utils";
+import { PathUtils } from "fumadocs-core/source";
+import { notFound } from "next/navigation";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
@@ -47,7 +46,7 @@ export default async function TagPage({ params }: TagPageProps) {
     .sort(
       (a, b) =>
         new Date(b.data.date ?? getName(b.path)).getTime() -
-        new Date(a.data.date ?? getName(a.path)).getTime()
+        new Date(a.data.date ?? getName(a.path)).getTime(),
     );
 
   if (posts.length === 0) {

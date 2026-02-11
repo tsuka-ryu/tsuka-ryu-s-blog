@@ -1,8 +1,7 @@
-import { blog } from "@/lib/source";
-import Link from "next/link";
-
 import { Gimmick } from "@/components/gimmick";
+import { blog } from "@/lib/source";
 import { getTagSlug } from "@/lib/tag-utils";
+import Link from "next/link";
 
 export default function TagsPage() {
   const posts = blog.getPages();
@@ -11,18 +10,14 @@ export default function TagsPage() {
   const tagCounts = new Map<string, number>();
 
   posts.forEach((post) => {
-    const tags = post.data.tags as string[] | undefined;
-    if (tags) {
-      tags.forEach((tag) => {
-        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
-      });
-    }
+    const tags = [...(post.data.tags ?? [])];
+    tags.forEach((tag) => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
   });
 
   // タグを記事数の多い順にソート
-  const sortedTags = Array.from(tagCounts.entries()).sort(
-    (a, b) => b[1] - a[1]
-  );
+  const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1]);
 
   return (
     <main className="relative flex flex-col flex-1">

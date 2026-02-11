@@ -1,8 +1,7 @@
-import { blog } from "@/lib/source";
-import { PathUtils } from "fumadocs-core/source";
-
 import { Gimmick } from "@/components/gimmick";
 import { PostListItem } from "@/components/post-list-item";
+import { blog } from "@/lib/source";
+import { PathUtils } from "fumadocs-core/source";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));

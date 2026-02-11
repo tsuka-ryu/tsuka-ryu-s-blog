@@ -7,9 +7,9 @@ import { createMetadata } from "@/lib/metadata";
 import { blog, getBlogImage } from "@/lib/source";
 import { getTagSlug } from "@/lib/tag-utils";
 import { getMDXComponents } from "@/mdx-components";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
-import Link from "next/link";
 
 import { PageTOCPopover, PageTOCPopoverContent, PageTOCPopoverTrigger } from "./client";
 
@@ -106,9 +106,9 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
           <h1 className="text-3xl font-semibold mb-4">{page.data.title}</h1>
           <p className="text-fd-muted-foreground mb-8">{page.data.description}</p>
 
-          {page.data.tags && (page.data.tags as string[]).length > 0 && (
+          {[...(page.data.tags ?? [])].length > 0 && (
             <div className="flex flex-wrap gap-2 mb-8">
-              {(page.data.tags as string[]).map((tag) => (
+              {[...(page.data.tags ?? [])].map((tag) => (
                 <Link
                   key={tag}
                   href={`/tags/${getTagSlug(tag)}`}

@@ -44,35 +44,21 @@ nr dev
 
 ## タグ機能
 
+記事にタグを付けることで、関連記事をまとめて表示できます。
+
 ### タグのスラッグ化
 
-日本語のタグ名を読みやすいURLに変換するため、スラッグ化を実装しています。
-
-**仕組み:**
-- タグ名は自動的に[transliteration](https://github.com/dzcpy/transliteration)で変換されます
-- より適切なスラッグが必要な場合は `lib/tag-utils.ts` でカスタム定義できます
+日本語のタグ名を読みやすいURLに変換するため、[transliteration](https://github.com/dzcpy/transliteration)を使用してスラッグ化しています。
 
 **例:**
 
-| タグ名       | URL                          | 変換方式       |
-| ------------ | ---------------------------- | -------------- |
-| ブログ盆栽   | `/tags/blog-bonsai`          | カスタム定義   |
-| Next.js      | `/tags/nextjs`               | カスタム定義   |
-| RSSフィード  | `/tags/rsshuido`             | 自動変換       |
-| rust         | `/tags/rust`                 | そのまま       |
+| タグ名      | URL                 |
+| ----------- | ------------------- |
+| Next.js     | `/tags/nextjs`      |
+| RSSフィード | `/tags/rsshuido`    |
+| rust        | `/tags/rust`        |
 
-**カスタムスラッグの追加:**
-
-`lib/tag-utils.ts` の `CUSTOM_TAG_SLUGS` に追加：
-
-```typescript
-const CUSTOM_TAG_SLUGS: Record<string, string> = {
-  ブログ盆栽: "blog-bonsai",
-  "Next.js": "nextjs",
-  // 新しいタグを追加
-  "新しいタグ": "new-tag",
-};
-```
+タグのスラッグ変換処理は `lib/tag-utils.ts` で管理されています。
 
 ## 参考リンク
 
