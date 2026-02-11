@@ -3,6 +3,8 @@ import { PathUtils } from "fumadocs-core/source";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Gimmick } from "@/components/gimmick";
+
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
 }
@@ -50,19 +52,9 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <main className="relative flex flex-col flex-1">
+      <Gimmick />
       <div className="z-0 mx-auto max-w-page w-full px-4 3xl:px-8 py-8">
-        <div className="mb-6">
-          <Link
-            href="/tags"
-            className="text-sm text-fd-muted-foreground hover:text-fd-foreground"
-          >
-            ← タグ一覧に戻る
-          </Link>
-        </div>
-        <h1 className="mb-2 text-2xl font-bold">タグ: {tag}</h1>
-        <p className="mb-6 text-sm text-fd-muted-foreground">
-          {posts.length}件の記事
-        </p>
+        <h1 className="mb-6 text-2xl font-bold">Posts for: #{tag}</h1>
         <section className="space-y-4">
           {posts.map((post) => (
             <div key={post.url}>

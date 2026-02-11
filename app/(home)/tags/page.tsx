@@ -1,6 +1,8 @@
 import { blog } from "@/lib/source";
 import Link from "next/link";
 
+import { Gimmick } from "@/components/gimmick";
+
 export default function TagsPage() {
   const posts = blog.getPages();
 
@@ -23,6 +25,7 @@ export default function TagsPage() {
 
   return (
     <main className="relative flex flex-col flex-1">
+      <Gimmick />
       <div className="z-0 mx-auto max-w-page w-full px-4 3xl:px-8 py-8">
         <h1 className="mb-6 text-2xl font-bold">Tags</h1>
         <ul className="space-y-2">

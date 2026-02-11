@@ -2,7 +2,7 @@ import { blog } from "@/lib/source";
 import { PathUtils } from "fumadocs-core/source";
 import Link from "next/link";
 
-import { Gimmick } from "./page.client";
+import { Gimmick } from "@/components/gimmick";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
