@@ -18,14 +18,7 @@ interface TagPageProps {
 
 export async function generateStaticParams() {
   const posts = blog.getPages();
-  const tags = new Set<string>();
-
-  posts.forEach((post) => {
-    const postTags = post.data.tags as string[] | undefined;
-    if (postTags) {
-      postTags.forEach((tag) => tags.add(tag));
-    }
-  });
+  const tags = new Set(posts.flatMap((post) => post.data.tags ?? []));
 
   return Array.from(tags).map((tag) => ({
     tag: getTagSlug(tag),
@@ -37,13 +30,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
   // 全てのタグを収集
   const allPosts = blog.getPages();
-  const allTags = new Set<string>();
-  allPosts.forEach((post) => {
-    const postTags = post.data.tags as string[] | undefined;
-    if (postTags) {
-      postTags.forEach((tag) => allTags.add(tag));
-    }
-  });
+  const allTags = new Set(allPosts.flatMap((post) => post.data.tags ?? []));
 
   // スラッグから元のタグ名を取得
   const tagName = getTagNameFromSlug(slug, Array.from(allTags));

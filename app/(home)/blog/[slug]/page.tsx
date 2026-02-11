@@ -5,9 +5,11 @@ import * as TocClerk from "@/components/toc/clerk";
 import * as TocDefault from "@/components/toc/default";
 import { createMetadata } from "@/lib/metadata";
 import { blog, getBlogImage } from "@/lib/source";
+import { getTagSlug } from "@/lib/tag-utils";
 import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
+import Link from "next/link";
 
 import { PageTOCPopover, PageTOCPopoverContent, PageTOCPopoverTrigger } from "./client";
 
@@ -103,6 +105,20 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
 
           <h1 className="text-3xl font-semibold mb-4">{page.data.title}</h1>
           <p className="text-fd-muted-foreground mb-8">{page.data.description}</p>
+
+          {page.data.tags && (page.data.tags as string[]).length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-8">
+              {(page.data.tags as string[]).map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/tags/${getTagSlug(tag)}`}
+                  className="text-xs text-fd-muted-foreground underline decoration-fd-primary hover:opacity-80"
+                >
+                  #{tag}
+                </Link>
+              ))}
+            </div>
+          )}
 
           <div className="prose max-w-[calc(100vw-2rem)] md:max-w-full min-w-0 flex-1">
             <Mdx components={getMDXComponents()} />
