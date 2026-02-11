@@ -41,8 +41,8 @@ export default async function TagPage({ params }: TagPageProps) {
 
   const posts = [...allPosts]
     .filter((post) => {
-      const tags = post.data.tags as string[] | undefined;
-      return tags?.includes(tagName);
+      const tags = [...(post.data.tags ?? [])];
+      return tags.includes(tagName);
     })
     .sort(
       (a, b) =>

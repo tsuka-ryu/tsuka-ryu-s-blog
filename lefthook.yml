@@ -1,5 +1,8 @@
 pre-push:
   commands:
+    format:
+      run: pnpm run format
+      fail_text: "Format failed. Please fix the formatting errors before pushing."
     build:
       run: pnpm run build
       fail_text: "Build failed. Please fix the build errors before pushing."
