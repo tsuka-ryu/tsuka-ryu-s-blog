@@ -38,8 +38,27 @@ nr dev
 | `app/(home)`              | ランディングページとその他のページ |
 | `app/(home)/blog`         | ブログ一覧・詳細ページ             |
 | `app/(home)/about`        | Aboutページ                        |
+| `app/(home)/tags`         | タグ一覧・タグ別記事一覧ページ     |
 | `app/docs`                | ドキュメントレイアウトとページ     |
 | `app/api/search/route.ts` | 検索機能のRoute Handler            |
+
+## タグ機能
+
+記事にタグを付けることで、関連記事をまとめて表示できます。
+
+### タグのスラッグ化
+
+日本語のタグ名を読みやすいURLに変換するため、[transliteration](https://github.com/dzcpy/transliteration)を使用してスラッグ化しています。
+
+**例:**
+
+| タグ名      | URL              |
+| ----------- | ---------------- |
+| Next.js     | `/tags/nextjs`   |
+| RSSフィード | `/tags/rsshuido` |
+| rust        | `/tags/rust`     |
+
+タグのスラッグ変換処理は `lib/tag-utils.ts` で管理されています。
 
 ## 参考リンク
 

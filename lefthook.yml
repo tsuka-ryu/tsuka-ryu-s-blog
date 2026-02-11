@@ -1,0 +1,17 @@
+pre-push:
+  commands:
+    format-check:
+      run: |
+        pnpm run format
+        if ! git diff --quiet || ! git diff --cached --quiet; then
+          echo "❌ フォーマットが必要なファイルがあります。以下のコマンドを実行してください："
+          echo "  pnpm run format"
+          echo "  git add -A"
+          echo "  git commit -m 'chore: format code'"
+          exit 1
+        fi
+        echo "✅ フォーマットチェック完了"
+      fail_text: "Format check failed. Please format the code and commit before pushing."
+    build:
+      run: pnpm run build
+      fail_text: "Build failed. Please fix the build errors before pushing."

@@ -8,6 +8,11 @@ export const linkItems: LinkItemType[] = [
     url: "/blog",
     active: "nested-url",
   },
+  {
+    text: "Tags",
+    url: "/tags",
+    active: "nested-url",
+  },
   { text: "About", url: "/about", active: "url" },
   { text: "RSS", url: "/blog/rss.xml", active: "url" },
   {

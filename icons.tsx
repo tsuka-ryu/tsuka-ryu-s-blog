@@ -1,10 +1,10 @@
+import { cn } from "@/utils/cn";
 /**
  * @license @icons - ISC
  *
  * All copyright belongs to https://github.com/lucide-icons/lucide, we bundle it as part of library to avoid upstream issues.
  */
 import { type ComponentProps, createElement, forwardRef } from "react";
-import { cn } from "@/utils/cn";
 
 const defaultAttributes: LucideProps = {
   xmlns: "http://www.w3.org/2000/svg",
