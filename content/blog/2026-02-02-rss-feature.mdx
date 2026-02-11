@@ -1,8 +1,9 @@
 ---
 title: RSSフィードについて
-description: RSSフィードを改善したのでメモ 
+description: RSSフィードを改善したのでメモ
 author: tsuka-ryu
 date: 2026-02-02T00:11:10+09:00
+tags: ["ブログ盆栽", "RSSフィード"]
 ---
 
 RSSフィードの実装を改善したのでメモります。
@@ -31,12 +32,8 @@ RSSフィードの実装を改善したのでメモります。
     class="lucide lucide-link size-3.5 shrink-0 text-fd-muted-foreground opacity-0 transition-opacity peer-hover:opacity-100"
     aria-hidden="true"
   >
-    <path
-      d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
-    ></path>
-    <path
-      d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
-    ></path>
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
   </svg>
 </h2>
 ```
@@ -51,19 +48,19 @@ const searchParams = await props.searchParams;
 
 const isRSSView = searchParams?.view === "rss";
 
-  const components = isRSSView
-    ? {
-        h1: "h1",
-        h2: "h2",
-        h3: "h3",
-        h4: "h4",
-        h5: "h5",
-        h6: "h6",
-      }
-    : undefined;
+const components = isRSSView
+  ? {
+      h1: "h1",
+      h2: "h2",
+      h3: "h3",
+      h4: "h4",
+      h5: "h5",
+      h6: "h6",
+    }
+  : undefined;
 
 // クエリパラメータがある場合は、`getMDXComponents`のヘッダータグを上書き
-<Mdx components={getMDXComponents(components)} />
+<Mdx components={getMDXComponents(components)} />;
 ```
 
 ## 修正その②
