@@ -1,0 +1,5 @@
+pre-push:
+  commands:
+    build:
+      run: pnpm run build
+      fail_text: "Build failed. Please fix the build errors before pushing."
