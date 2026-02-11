@@ -1,9 +1,9 @@
 import { blog } from "@/lib/source";
 import { PathUtils } from "fumadocs-core/source";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Gimmick } from "@/components/gimmick";
+import { PostListItem } from "@/components/post-list-item";
 
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
@@ -57,19 +57,7 @@ export default async function TagPage({ params }: TagPageProps) {
         <h1 className="mb-6 text-2xl font-bold">Posts for: #{tag}</h1>
         <section className="space-y-4">
           {posts.map((post) => (
-            <div key={post.url}>
-              <Link
-                href={post.url}
-                className="text-lg text-accent-foreground underline decoration-fd-primary hover:opacity-80"
-              >
-                {post.data.title}
-              </Link>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                {new Date(post.data.date ?? getName(post.path))
-                  .toLocaleString("ja-JP")
-                  .replace(/\//g, "/")}
-              </p>
-            </div>
+            <PostListItem key={post.url} post={post} />
           ))}
         </section>
       </div>
