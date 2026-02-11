@@ -1,7 +1,15 @@
 pre-push:
   commands:
-    format:
-      run: pnpm run format
+    format-and-commit:
+      run: |
+        pnpm run format
+        if ! git diff --quiet || ! git diff --cached --quiet; then
+          git add -A
+          git commit -m "chore: auto-format before push
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+          echo "Auto-committed formatting changes"
+        fi
       fail_text: "Format failed. Please fix the formatting errors before pushing."
     build:
       run: pnpm run build
