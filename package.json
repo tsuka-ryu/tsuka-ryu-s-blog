@@ -9,7 +9,10 @@
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "lint": "pnpm oxlint --type-aware --fix --fix-suggestions",
-    "format": "pnpm oxfmt"
+    "format": "pnpm oxfmt",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@orama/stopwords": "^3.1.18",
@@ -38,12 +41,14 @@
     "@types/node": "^25.2.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitest/ui": "^4.0.18",
     "lefthook": "^2.1.0",
     "oxfmt": "^0.31.0",
     "oxlint": "^1.46.0",
     "oxlint-tsgolint": "^0.12.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }
