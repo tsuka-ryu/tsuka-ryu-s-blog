@@ -1,0 +1,58 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Next.js Build Output > should not have any route type changes from previous build 1`] = `
+[
+  {
+    "path": "/",
+    "type": "Static",
+  },
+  {
+    "path": "/_not-found",
+    "type": "Static",
+  },
+  {
+    "path": "/about",
+    "type": "Static",
+  },
+  {
+    "path": "/api/search",
+    "type": "Dynamic",
+  },
+  {
+    "path": "/blog",
+    "type": "Static",
+  },
+  {
+    "path": "/blog/[slug]",
+    "type": "SSG",
+  },
+  {
+    "path": "/blog/[slug]/rss",
+    "type": "SSG",
+  },
+  {
+    "path": "/blog/rss.xml",
+    "type": "Static",
+  },
+  {
+    "path": "/docs/[[...slug]]",
+    "type": "SSG",
+  },
+  {
+    "path": "/icon.png",
+    "type": "Static",
+  },
+  {
+    "path": "/og/blog/[...slug]",
+    "type": "SSG",
+  },
+  {
+    "path": "/tags",
+    "type": "Static",
+  },
+  {
+    "path": "/tags/[tag]",
+    "type": "SSG",
+  },
+]
+`;
