@@ -3,6 +3,9 @@ import { PostListItem } from "@/components/post-list-item";
 import { blog } from "@/lib/source";
 import { PathUtils } from "fumadocs-core/source";
 
+// Force dynamic rendering for testing
+export const revalidate = 0;
+
 function getName(path: string) {
   return PathUtils.basename(path, PathUtils.extname(path));
 }
