@@ -1,6 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import type { BuildManifest } from "../scripts/parse-build-output";
+
 import { runBuildAndParse } from "../scripts/parse-build-output";
+
+import type { BuildManifest } from "../scripts/parse-build-output";
 
 describe("Next.js Build Output", () => {
   let manifest: BuildManifest;
@@ -46,11 +48,9 @@ describe("Next.js Build Output", () => {
     ];
 
     const unexpectedDynamicRoutes = manifest.routes.filter(
-      (route) =>
-        route.type === "Dynamic" && !allowedDynamicRoutes.includes(route.path),
+      (route) => route.type === "Dynamic" && !allowedDynamicRoutes.includes(route.path),
     );
 
     expect(unexpectedDynamicRoutes).toEqual([]);
   });
 });
-
