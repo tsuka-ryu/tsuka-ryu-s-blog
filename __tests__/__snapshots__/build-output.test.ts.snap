@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Next.js Build Output > should match the expected route types snapshot 1`] = `
+exports[`Next.js Build Output > should not have any route type changes from previous build 1`] = `
 [
   {
     "path": "/",
