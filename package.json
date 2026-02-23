@@ -38,6 +38,13 @@
     "transliteration": "^2.6.1",
     "zod": "^4.3.6"
   },
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 114",
+    "safari >= 16.4",
+    "not dead"
+  ],
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4.2.0",
