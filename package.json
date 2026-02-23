@@ -13,7 +13,9 @@
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:watch": "vitest",
-    "test:update-snapshots": "vitest run -u"
+    "test:update-snapshots": "vitest run -u",
+    "analyze": "next experimental-analyze",
+    "analyze:output": "next experimental-analyze --output"
   },
   "dependencies": {
     "@orama/stopwords": "^3.1.18",
@@ -36,6 +38,13 @@
     "transliteration": "^2.6.1",
     "zod": "^4.3.6"
   },
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 114",
+    "safari >= 16.4",
+    "not dead"
+  ],
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4.2.0",
