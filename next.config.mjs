@@ -6,6 +6,13 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   serverExternalPackages: ["@takumi-rs/image-response"],
+
+  experimental: {
+    optimizeCss: true,
+    cssChunking: "strict",
+  },
+
+  compress: true,
 };
 
 export default withMDX(config);
