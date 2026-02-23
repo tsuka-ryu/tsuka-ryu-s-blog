@@ -47,6 +47,7 @@ export function Gimmick() {
           rotation={60}
           offsetX={1.5}
           offsetY={1.8}
+          maxPixelCount={2073600}
         />
       )}
     </>

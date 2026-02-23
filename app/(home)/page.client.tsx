@@ -46,6 +46,7 @@ export function Hero() {
           scale={1.1}
           offsetX={0}
           offsetY={0}
+          maxPixelCount={2073600}
         />
       )}
     </>
