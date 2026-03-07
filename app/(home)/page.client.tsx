@@ -16,10 +16,15 @@ export function Hero() {
   const [showShaders, setShowShaders] = useState(false);
 
   useEffect(() => {
-    // apply some delay, otherwise on slower devices, it errors with uniform images not being fully loaded.
-    setTimeout(() => {
-      setShowShaders(true);
-    }, 400);
+    // Show after window load to avoid affecting LCP measurement.
+    // Also prevents errors on slower devices where uniform images aren't fully loaded.
+    const show = () => setShowShaders(true);
+    if (document.readyState === "complete") {
+      show();
+    } else {
+      window.addEventListener("load", show);
+      return () => window.removeEventListener("load", show);
+    }
   }, []);
 
   return (
@@ -41,6 +46,7 @@ export function Hero() {
           scale={1.1}
           offsetX={0}
           offsetY={0}
+          maxPixelCount={2073600}
         />
       )}
     </>
