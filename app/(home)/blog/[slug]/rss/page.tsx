@@ -4,6 +4,7 @@ import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
 
 import type { Metadata } from "next";
+import type { MDXComponents } from "mdx/types";
 
 export async function generateMetadata(props: PageProps<"/blog/[slug]/rss">): Promise<Metadata> {
   const params = await props.params;
@@ -44,7 +45,7 @@ export default async function RSSPage(props: PageProps<"/blog/[slug]/rss">) {
     h4: "h4",
     h5: "h5",
     h6: "h6",
-  };
+  } as MDXComponents;
 
   return (
     <main>
