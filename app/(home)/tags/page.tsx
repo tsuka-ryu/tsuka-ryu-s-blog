@@ -17,9 +17,7 @@ export default function TagsPage() {
   });
 
   // タグをあいうえお順にソート
-  const sortedTags = Array.from(tagCounts.entries()).sort((a, b) =>
-    a[0].localeCompare(b[0], "ja")
-  );
+  const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => a[0].localeCompare(b[0], "ja"));
 
   return (
     <main className="relative flex flex-col flex-1">
