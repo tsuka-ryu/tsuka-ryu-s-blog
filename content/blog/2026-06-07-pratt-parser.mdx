@@ -1,9 +1,9 @@
 ---
 title: Pratt Parserについてのメモ
-description: Pratt Parserについてメモします 
+description: Pratt Parserについてメモします
 author: tsuka-ryu
 date: 2026-06-07 10:00:00+09:00
-tags: ["コンパイラ","パーサー","oxc"]
+tags: ["コンパイラ", "パーサー", "oxc"]
 ---
 
 こんにちは。6月になりました。暑かったり寒かったりで、季節が不明ですね。
@@ -24,14 +24,14 @@ tags: ["コンパイラ","パーサー","oxc"]
 
 他にもあると思いますが、自分が眺めた参考文献を列挙しておきます。
 
-* [matklad - Simple but Powerful Pratt Parsing](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html): とにかくこれを読めばよし
-* [MoonBit Pearls Vol.01：Implementing a Pratt Parser in MoonBit](https://www.moonbitlang.com/pearls/pratt-parse): 一番最初のブログがこれなんだ〜（小並感）
-* [Top-Down operator precedence (Pratt) parsing](https://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing): 比較的短め
+- [matklad - Simple but Powerful Pratt Parsing](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html): とにかくこれを読めばよし
+- [MoonBit Pearls Vol.01：Implementing a Pratt Parser in MoonBit](https://www.moonbitlang.com/pearls/pratt-parse): 一番最初のブログがこれなんだ〜（小並感）
+- [Top-Down operator precedence (Pratt) parsing](https://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing): 比較的短め
 
 以下では、実際に使われています。
 
-* [acorn/src/expression.js](https://github.com/acornjs/acorn/blob/master/acorn/src/expression.js): Pratt とほぼ同型の優先順位パーサー（operator precedence parser）を使っています
-* [oxc_parser/src/js/expression.rs](https://github.com/oxc-project/oxc/blob/388af9d7d577424292931eede19ed5c9dd053194/crates/oxc_parser/src/js/expression.rs#L1228): 二項演算子の解析に使っています
+- [acorn/src/expression.js](https://github.com/acornjs/acorn/blob/master/acorn/src/expression.js): Pratt とほぼ同型の優先順位パーサー（operator precedence parser）を使っています
+- [oxc_parser/src/js/expression.rs](https://github.com/oxc-project/oxc/blob/388af9d7d577424292931eede19ed5c9dd053194/crates/oxc_parser/src/js/expression.rs#L1228): 二項演算子の解析に使っています
 
 なので、再帰下降 ＋ Prattがわかればだいぶ良さそうです。
 
@@ -41,7 +41,7 @@ tags: ["コンパイラ","パーサー","oxc"]
 
 `a + b * c`と`a * b + c`をそれぞれちゃんとパースできるか、というのが今回見たい例です。（元のコードと違って、三項演算子に関係する部分は削除してます。）
 
-````rust
+```rust
 // 結合力の定義
 fn infix_bp(&self, tok: &Token) -> Option<(u8, u8)> {
     match tok {
@@ -69,7 +69,7 @@ fn parse_expr_bp(&mut self, min_bp: u8) -> Expression {
         if lbp < min_bp {
             break;
         }
-        
+
         // PART 5
         let op_tok = self.advance();
 
@@ -89,9 +89,10 @@ fn parse_expr_bp(&mut self, min_bp: u8) -> Expression {
     // PART 6
     lhs
 }
-````
+```
 
 ざっくり6つのPARTに分かれます。
+
 1. 左辺（left-hand side）には`a`などのatomを代入します。PART 2が`break`になった場合、この値をPART 6で返します。
 2. loop部分、`break`しない場合、後続のPART 3〜5を繰り返します。
 3. `peek()`して次の演算子を読み、その結合力を受け取ります。もし、結合力を定義していないもの（`;`など）だったら`break`します。
@@ -105,7 +106,7 @@ fn parse_expr_bp(&mut self, min_bp: u8) -> Expression {
 
 ```
 a   +   b   *   c
-  3   4  
+  3   4
           5   6
 ```
 
@@ -115,7 +116,7 @@ a   +   b   *   c
 
 ```
 a   *   b   +   c
-  5   6  
+  5   6
           3   4
 ```
 
@@ -126,10 +127,11 @@ a   *   b   +   c
 ## 結合力の流儀
 
 ### matkladの流儀
+
 matkladでは左右の結合力に差をつけて定義することで結合性を表現していました。`+`の`(3, 4)`のように右結合力を大きくすると、`a + b + c`は左結合で`(a + b) + c`になります（再帰側の`min_bp = 4`に対して次の`+`の左結合力`3`が負けて`break`するため）。逆に、三項演算子の`(2, 1)`のように左結合力を大きくすると右結合になります。一般化すると、
 
-* `lbp < rbp` → 左結合（普通の算術演算子など）
-* `lbp > rbp` → 右結合（三項演算子、`**`、代入など）
+- `lbp < rbp` → 左結合（普通の算術演算子など）
+- `lbp > rbp` → 右結合（三項演算子、`**`、代入など）
 
 ただ、この記事を書きながらClaudeに教わったのですが、別の流儀もあるようです。
 
@@ -137,7 +139,7 @@ matkladでは左右の結合力に差をつけて定義することで結合性�
 
 oxcでは、左結合か右結合かを事前に定義しています。
 
-````rust
+```rust
 impl Precedence {
     pub fn is_right_associative(self) -> bool {
         matches!(self, Self::Exponentiation | Self::Conditional | Self::Assign)
@@ -170,11 +172,11 @@ impl Precedence {
     }
     // ...etc
 }
-````
+```
 
 また、優先度はペアではなく、一つの数字で表現されています。
 
-````rust
+```rust
 pub enum Precedence {
     Lowest = 0, // matkladでは初期値として 0 を直接代入しているが、oxcは最下位を enum の variant として明示することで型安全にしている
     Comma = 1,
@@ -200,11 +202,11 @@ pub enum Precedence {
     Call = 21,
     Member = 22,
 }
-````
+```
 
 上記の左右結合の定義と優先度を組み合わせることで、PART 4の`break`の箇所が以下のようになっています。
 
-````rust
+```rust
 let stop = if left_precedence.is_right_associative() {
     left_precedence < min_precedence
 } else {
@@ -214,11 +216,11 @@ let stop = if left_precedence.is_right_associative() {
 if stop {
     break;
 }
-````
+```
 
 [oxcのコメント](https://github.com/oxc-project/oxc/blob/d16f456ce93fcdadd2cf926afd1b68a6a84a31f8/crates/oxc_syntax/src/precedence.rs#L5-L15)にある通り、ECMAの仕様から導出した順番として定義したかったようです。
 
-````rust
+```rust
 /// Operator Precedence
 /// 演算子の優先順位
 ///
@@ -236,7 +238,7 @@ if stop {
 /// The values are the same as
 /// [esbuild](https://github.com/evanw/esbuild/blob/78f89e41d5e8a7088f4820351c6305cc339f8820/internal/js_ast/js_ast.go#L28)
 /// この値はesbuildと同じです。
-````
+```
 
 いい話だなあ（？）
 

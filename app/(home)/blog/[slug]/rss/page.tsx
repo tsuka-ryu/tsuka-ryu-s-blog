@@ -3,8 +3,8 @@ import { blog, getBlogImage } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import { notFound } from "next/navigation";
 
-import type { Metadata } from "next";
 import type { MDXComponents } from "mdx/types";
+import type { Metadata } from "next";
 
 export async function generateMetadata(props: PageProps<"/blog/[slug]/rss">): Promise<Metadata> {
   const params = await props.params;
